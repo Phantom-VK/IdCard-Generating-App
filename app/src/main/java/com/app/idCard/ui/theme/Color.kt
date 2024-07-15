@@ -1,0 +1,26 @@
+package com.app.idCard.ui.theme
+
+import androidx.compose.ui.graphics.Color
+
+
+//LIGHT THEME
+val LightThemeWhite = Color(0xFFFFFFFF)  // White
+val LightThemeBlack = Color(0xFF000000)  // Black
+val LightThemeRed = Color(0xFFE53935)  // Red
+val PrimaryButtonTextLight = Color(0xFFFFFFFF)  // White
+val LightThemeGreen = Color(0xFF43A047)  // Green
+val SecondaryButtonTextLight = Color(0xFFFFFFFF)  // White
+val LightThemeLightGrey = Color(0xFF999999)  // Light Gray
+val LightThemeVLightGrey = Color(0xFFE2E2E2)  // Very Light Gray
+val LightThemeDarkGrey = Color(0xFFBDBDBD)  // Dark Gray
+
+//DARK THEME
+val DarkThemeVeryDarkGrey = Color(0xFF212121)  // Very Dark Gray
+val DarkThemeWhite = Color(0xFFFFFFFF)  // White
+val DarkThemeRed = Color(0xFFEF5350)  // Red
+val DarkThemeBlack = Color(0xFF000000)  // Black
+val DarkThemeGreen = Color(0xFF66BB6A)  // Green
+val SecondaryButtonTextDark = Color(0xFF000000)  // Black
+val DarkThemeDarkGrey = Color(0xFF292929)  // Dark Gray
+val DarkThemeMedGrey = Color(0xFF616161)  // Medium Gray
+val DarkThemeLightGrey = Color(0xFF616161)  // Light Gray
