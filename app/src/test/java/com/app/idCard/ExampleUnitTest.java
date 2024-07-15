@@ -1,4 +1,4 @@
-package com.app.IdCard;
+package com.app.idCard;
 
 import org.junit.Test;
 
