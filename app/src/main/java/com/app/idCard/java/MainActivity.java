@@ -14,8 +14,6 @@ import android.provider.Settings;
 import android.util.Log;
 import android.widget.Toast;
 
-import androidx.activity.result.ActivityResult;
-import androidx.activity.result.ActivityResultCallback;
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
@@ -78,22 +76,18 @@ public class MainActivity extends AppCompatActivity {
     }
     private final ActivityResultLauncher<Intent> storageActivityResultLauncher =
             registerForActivityResult(new ActivityResultContracts.StartActivityForResult(),
-                    new ActivityResultCallback<ActivityResult>(){
-
-                        @Override
-                        public void onActivityResult(ActivityResult o) {
-                            if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.R){
-                                //Android is 11 (R) or above
-                                if(Environment.isExternalStorageManager()){
-                                    //Manage External Storage Permissions Granted
-                                    Log.d(TAG, "onActivityResult: Manage External Storage Permissions Granted");
-                                }else{
-                                    Toast.makeText(MainActivity.this, "Storage Permissions Denied", Toast.LENGTH_SHORT).show();
-                                }
+                    o -> {
+                        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.R){
+                            //Android is 11 (R) or above
+                            if(Environment.isExternalStorageManager()){
+                                //Manage External Storage Permissions Granted
+                                Log.d(TAG, "onActivityResult: Manage External Storage Permissions Granted");
                             }else{
-                                //Below android 11
-
+                                Toast.makeText(MainActivity.this, "Storage Permissions Denied", Toast.LENGTH_SHORT).show();
                             }
+                        }else{
+                            //Below android 11
+
                         }
                     });
 

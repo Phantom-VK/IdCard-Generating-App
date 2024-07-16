@@ -1,6 +1,7 @@
 package com.app.idCard.kotlin
 
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
@@ -41,11 +42,13 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalView
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.KeyboardType
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.fragment.app.Fragment
 import com.app.idCard.R
 import com.app.idCard.java.AppUtils
 import com.app.idCard.ui.theme.IdCardAppTheme
+import kotlinx.coroutines.FlowPreview
 
 
 class ProfileFragment :Fragment(R.layout.user_profile){
@@ -70,7 +73,6 @@ fun UserProfile(){
     var email by remember { mutableStateOf("") }
     var mobilenumber by remember { mutableStateOf("") }
     var pdfName by remember { mutableStateOf("") }
-    var profilePictureUrl by remember { mutableStateOf("") }
 
     val appUtil = AppUtils()
     val context = LocalContext.current
@@ -163,10 +165,10 @@ fun UserProfile(){
             )
         }
 
-        Column(
+        Row(
             modifier = Modifier.fillMaxWidth(),
-            horizontalAlignment = Alignment.CenterHorizontally,
-            verticalArrangement = Arrangement.Center
+            horizontalArrangement = Arrangement.SpaceEvenly,
+            verticalAlignment = Alignment.CenterVertically
         ) {
 
 
@@ -174,6 +176,8 @@ fun UserProfile(){
                 onClick = {
 
                     appUtil.convertComposableToPDF(context, view, pdfName)
+                    appUtil.openPDF(context, pdfName)
+
 
                 },
                 colors = ButtonDefaults.buttonColors(MaterialTheme.colorScheme.onPrimary),
@@ -181,6 +185,19 @@ fun UserProfile(){
             ) {
                 Text(text = "Save to PDF", color = MaterialTheme.colorScheme.secondary)
             }
+
+//            Button(
+//                onClick = {
+//                    Log.d("myLog", "pdfName after clicking open: $pdfName")
+//
+//
+//
+//                },
+//                colors = ButtonDefaults.buttonColors(MaterialTheme.colorScheme.onPrimary),
+//                modifier = Modifier.padding(top = 10.dp)
+//            ) {
+//                Text(text = "Open PDF", color = MaterialTheme.colorScheme.secondary)
+//            }
         }
     }
 

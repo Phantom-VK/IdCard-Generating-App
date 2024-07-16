@@ -1,8 +1,10 @@
 package com.app.idCard.java;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Canvas;
 import android.graphics.pdf.PdfDocument;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Environment;
 import android.util.DisplayMetrics;
@@ -10,6 +12,8 @@ import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.Toast;
+
+import androidx.core.content.FileProvider;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -68,5 +72,36 @@ public class AppUtils {
         }
 
         pdfDocument.close();
+    }
+
+
+    public void openPDF(Context context, String pdfName) {
+        File downloadsDir = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS);
+        String fileName = pdfName+".pdf";
+        File file = new File(downloadsDir, fileName);
+
+        Log.d("myLog", "pdf name in openPDF function: "+fileName);
+        Log.d("myLog", String.valueOf(downloadsDir));
+
+        if (file.exists()) {
+            Uri uri;
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
+                uri = FileProvider.getUriForFile(context, context.getPackageName() + ".provider", file);
+            } else {
+                uri = Uri.fromFile(file);
+            }
+
+            Intent intent = new Intent(Intent.ACTION_VIEW);
+            intent.setDataAndType(uri, "application/pdf");
+            intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+
+            try {
+                context.startActivity(intent);
+            } catch (Exception e) {
+                Toast.makeText(context, "No application to view PDF", Toast.LENGTH_SHORT).show();
+            }
+        } else {
+            Toast.makeText(context, "PDF file does not exist", Toast.LENGTH_SHORT).show();
+        }
     }
 }

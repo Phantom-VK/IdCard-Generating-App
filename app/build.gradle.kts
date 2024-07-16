@@ -51,6 +51,7 @@ dependencies {
     implementation(libs.core.ktx)
     implementation(libs.ui.android)
     implementation(libs.material3.android)
+    implementation(libs.ui.tooling.preview.android)
     testImplementation(libs.junit)
     androidTestImplementation(libs.ext.junit)
     androidTestImplementation(libs.espresso.core)
