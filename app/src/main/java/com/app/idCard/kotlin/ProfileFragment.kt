@@ -14,6 +14,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
+import androidx.compose.material.icons.filled.AccountBox
 import androidx.compose.material.icons.filled.AccountCircle
 import androidx.compose.material.icons.filled.Call
 import androidx.compose.material.icons.filled.Edit
@@ -37,12 +38,14 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.platform.ComposeView
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.platform.LocalView
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
 import androidx.fragment.app.Fragment
 import com.app.idCard.R
 import com.app.idCard.java.AppUtils
+import com.app.idCard.ui.theme.IdCardAppTheme
 
 
 class ProfileFragment :Fragment(R.layout.user_profile){
@@ -51,7 +54,10 @@ class ProfileFragment :Fragment(R.layout.user_profile){
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         view.findViewById<ComposeView>(R.id.compose_view).setContent {
-            UserProfile()
+            IdCardAppTheme {
+                UserProfile()
+            }
+
         }
     }
 
@@ -63,11 +69,12 @@ fun UserProfile(){
     var address by remember { mutableStateOf("") }
     var email by remember { mutableStateOf("") }
     var mobilenumber by remember { mutableStateOf("") }
-    var wpnumber by remember { mutableStateOf("") }
+    var pdfName by remember { mutableStateOf("") }
     var profilePictureUrl by remember { mutableStateOf("") }
 
     val appUtil = AppUtils()
     val context = LocalContext.current
+    val view = LocalView.current
 
 
     Column(
@@ -148,11 +155,11 @@ fun UserProfile(){
             )
 
             UnderlineTextField(
-                value = wpnumber,
-                onValueChange = { wpnumber = it },
-                hint = "WhatsApp Number",
-                keyboardType = KeyboardType.Number,
-                imageVector = Icons.Filled.Call
+                value = pdfName,
+                onValueChange = { pdfName = it },
+                hint = "Enter PDF Name",
+                keyboardType = KeyboardType.Text,
+                imageVector = Icons.Filled.AccountBox
             )
         }
 
@@ -161,26 +168,18 @@ fun UserProfile(){
             horizontalAlignment = Alignment.CenterHorizontally,
             verticalArrangement = Arrangement.Center
         ) {
-            Button(
-                onClick = { /* TODO: Implement change password functionality */ },
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(15.dp),
-                colors = ButtonDefaults.buttonColors(MaterialTheme.colorScheme.background)
-            ) {
-                Text(text = "Change Password", color = MaterialTheme.colorScheme.secondary)
-            }
+
 
             Button(
                 onClick = {
 
-                    appUtil.convertXMLToPDF(context)
+                    appUtil.convertComposableToPDF(context, view, pdfName)
 
                 },
                 colors = ButtonDefaults.buttonColors(MaterialTheme.colorScheme.onPrimary),
                 modifier = Modifier.padding(top = 10.dp)
             ) {
-                Text(text = "Save", color = MaterialTheme.colorScheme.secondary)
+                Text(text = "Save to PDF", color = MaterialTheme.colorScheme.secondary)
             }
         }
     }
