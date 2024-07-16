@@ -1,7 +1,9 @@
 package com.app.idCard.java;
 
 
+import android.content.Context;
 import android.os.Bundle;
+import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -31,4 +33,7 @@ public class MainActivity extends AppCompatActivity {
 
 
     }
+
+
 }
+

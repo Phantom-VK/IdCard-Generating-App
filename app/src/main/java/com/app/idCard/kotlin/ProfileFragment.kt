@@ -36,15 +36,18 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.platform.ComposeView
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
 import androidx.fragment.app.Fragment
 import com.app.idCard.R
+import com.app.idCard.java.AppUtils
 import com.app.idCard.ui.theme.IdCardAppTheme
 
 
 class ProfileFragment :Fragment(R.layout.user_profile){
+
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -57,6 +60,8 @@ class ProfileFragment :Fragment(R.layout.user_profile){
     }
 
 
+
+
 }
 
 @Composable
@@ -67,6 +72,11 @@ fun UserProfile(){
     var mobilenumber by remember { mutableStateOf("") }
     var wpnumber by remember { mutableStateOf("") }
     var profilePictureUrl by remember { mutableStateOf("") }
+
+    val appUtil = AppUtils()
+    val context = LocalContext.current
+
+
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -171,7 +181,8 @@ fun UserProfile(){
             Button(
                 onClick = {
 
-                    //TODO
+                    appUtil.makeToast(context)
+
                 },
                 colors = ButtonDefaults.buttonColors(MaterialTheme.colorScheme.onPrimary),
                 modifier = Modifier.padding(top = 10.dp)
