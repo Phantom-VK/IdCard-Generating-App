@@ -43,7 +43,6 @@ import androidx.compose.ui.unit.dp
 import androidx.fragment.app.Fragment
 import com.app.idCard.R
 import com.app.idCard.java.AppUtils
-import com.app.idCard.ui.theme.IdCardAppTheme
 
 
 class ProfileFragment :Fragment(R.layout.user_profile){
@@ -52,15 +51,9 @@ class ProfileFragment :Fragment(R.layout.user_profile){
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         view.findViewById<ComposeView>(R.id.compose_view).setContent {
-            IdCardAppTheme {
-                UserProfile()
-            }
-
+            UserProfile()
         }
     }
-
-
-
 
 }
 
@@ -181,7 +174,7 @@ fun UserProfile(){
             Button(
                 onClick = {
 
-                    appUtil.makeToast(context)
+                    appUtil.convertXMLToPDF(context)
 
                 },
                 colors = ButtonDefaults.buttonColors(MaterialTheme.colorScheme.onPrimary),
