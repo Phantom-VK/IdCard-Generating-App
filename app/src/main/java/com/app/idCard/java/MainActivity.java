@@ -23,7 +23,8 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 import com.app.idCard.R;
-import com.app.idCard.kotlin.ProfileFragment;
+import com.app.idCard.kotlin.fragments.ProfileFragment;
+
 
 public class MainActivity extends AppCompatActivity {
 
@@ -37,6 +38,8 @@ public class MainActivity extends AppCompatActivity {
             return insets;
         });
 
+
+
         getSupportFragmentManager()
                 .beginTransaction()
                 .add(R.id.main, new ProfileFragment())
@@ -45,6 +48,9 @@ public class MainActivity extends AppCompatActivity {
         requestForStoragePermissions();
 
     }
+
+
+
     private static final int STORAGE_PERMISSION_CODE = 23;
 
     private void requestForStoragePermissions() {
@@ -107,5 +113,6 @@ public class MainActivity extends AppCompatActivity {
             }
         }
     }
+
 }
 

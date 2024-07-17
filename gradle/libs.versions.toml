@@ -12,6 +12,9 @@ coreKtx = "1.13.1"
 uiAndroid = "1.6.8"
 material3Android = "1.2.1"
 uiToolingPreviewAndroid = "1.6.8"
+navigationFragmentKtx = "2.7.7"
+navigationUiKtx = "2.7.7"
+navigationCompose = "2.7.7"
 
 [libraries]
 junit = { group = "junit", name = "junit", version.ref = "junit" }
@@ -25,6 +28,9 @@ core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx"
 ui-android = { group = "androidx.compose.ui", name = "ui-android", version.ref = "uiAndroid" }
 material3-android = { group = "androidx.compose.material3", name = "material3-android", version.ref = "material3Android" }
 ui-tooling-preview-android = { group = "androidx.compose.ui", name = "ui-tooling-preview-android", version.ref = "uiToolingPreviewAndroid" }
+navigation-fragment-ktx = { group = "androidx.navigation", name = "navigation-fragment-ktx", version.ref = "navigationFragmentKtx" }
+navigation-ui-ktx = { group = "androidx.navigation", name = "navigation-ui-ktx", version.ref = "navigationUiKtx" }
+navigation-compose = { group = "androidx.navigation", name = "navigation-compose", version.ref = "navigationCompose" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }

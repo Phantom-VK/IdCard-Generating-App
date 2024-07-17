@@ -1,7 +1,6 @@
-package com.app.idCard.kotlin
+package com.app.idCard.kotlin.fragments
 
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
@@ -33,6 +32,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -42,41 +42,52 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalView
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.KeyboardType
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.fragment.app.Fragment
 import com.app.idCard.R
-import com.app.idCard.java.AppUtils
+import com.app.idCard.kotlin.AppUtils
 import com.app.idCard.ui.theme.IdCardAppTheme
-import kotlinx.coroutines.FlowPreview
 
 
-class ProfileFragment :Fragment(R.layout.user_profile){
+class ProfileFragment :Fragment(R.layout.fragment_user_profile){
 
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        view.findViewById<ComposeView>(R.id.compose_view).setContent {
+        view.findViewById<ComposeView>(R.id.student_info_compose_view).setContent {
             IdCardAppTheme {
                 UserProfile()
+                }
             }
-
         }
     }
 
-}
 
 @Composable
-fun UserProfile(){
-    var name by remember { mutableStateOf("") }
-    var address by remember { mutableStateOf("") }
-    var email by remember { mutableStateOf("") }
-    var mobilenumber by remember { mutableStateOf("") }
-    var pdfName by remember { mutableStateOf("") }
-
-    val appUtil = AppUtils()
+fun UserProfile() {
+    val appUtils = AppUtils()
     val context = LocalContext.current
     val view = LocalView.current
+
+
+    var name by remember {
+        mutableStateOf("")
+    }
+    var regNumber by remember {
+        mutableStateOf("")
+    }
+    var branch by remember {
+        mutableStateOf("")
+    }
+    var dob by remember {
+        mutableStateOf("")
+    }
+    var mobilenumber by remember {
+        mutableStateOf("")
+    }
+    var pdfName by rememberSaveable {
+        mutableStateOf("")
+    }
 
 
     Column(
@@ -93,7 +104,7 @@ fun UserProfile(){
             horizontalArrangement = Arrangement.Start,
             verticalAlignment = Alignment.CenterVertically
         ) {
-            IconButton(onClick = { /*TODO*/}) {
+            IconButton(onClick = { /*TODO*/ }) {
                 Icon(
                     imageVector = Icons.AutoMirrored.Filled.ArrowBack,
                     contentDescription = "Go Back",
@@ -133,27 +144,34 @@ fun UserProfile(){
             )
 
             UnderlineTextField(
-                value = address,
-                onValueChange = { address = it },
-                hint = "Address",
+                value = branch,
+                onValueChange = { branch = it },
+                hint = "Branch",
                 keyboardType = KeyboardType.Text,
                 imageVector = Icons.Filled.LocationOn
             )
 
             UnderlineTextField(
-                value = email,
-                onValueChange = { email = it },
-                hint = "Email",
-                keyboardType = KeyboardType.Email,
+                value = dob,
+                onValueChange = { dob = it },
+                hint = "Date Of Birth",
+                keyboardType = KeyboardType.Text,
                 imageVector = Icons.Outlined.Email
             )
 
             UnderlineTextField(
-                value = mobilenumber,
+                value =mobilenumber,
                 onValueChange = { mobilenumber = it },
                 hint = "Mobile Number",
                 keyboardType = KeyboardType.Number,
                 imageVector = Icons.Filled.Call
+            )
+            UnderlineTextField(
+                value = regNumber,
+                onValueChange = { regNumber = it },
+                hint = "Registration Number",
+                keyboardType = KeyboardType.Text,
+                imageVector = Icons.Filled.AccountBox
             )
 
             UnderlineTextField(
@@ -170,14 +188,12 @@ fun UserProfile(){
             horizontalArrangement = Arrangement.SpaceEvenly,
             verticalAlignment = Alignment.CenterVertically
         ) {
-
-
             Button(
                 onClick = {
-
-                    appUtil.convertComposableToPDF(context, view, pdfName)
-                    appUtil.openPDF(context, pdfName)
-
+                    appUtils.convertComposableToPDF(context = context,
+                        composeView = view,
+                        pdfName = pdfName)
+                    appUtils.openPDF(context, pdfName)
 
                 },
                 colors = ButtonDefaults.buttonColors(MaterialTheme.colorScheme.onPrimary),
@@ -185,23 +201,8 @@ fun UserProfile(){
             ) {
                 Text(text = "Save to PDF", color = MaterialTheme.colorScheme.secondary)
             }
-
-//            Button(
-//                onClick = {
-//                    Log.d("myLog", "pdfName after clicking open: $pdfName")
-//
-//
-//
-//                },
-//                colors = ButtonDefaults.buttonColors(MaterialTheme.colorScheme.onPrimary),
-//                modifier = Modifier.padding(top = 10.dp)
-//            ) {
-//                Text(text = "Open PDF", color = MaterialTheme.colorScheme.secondary)
-//            }
         }
     }
-
-
 }
 
 @Composable
