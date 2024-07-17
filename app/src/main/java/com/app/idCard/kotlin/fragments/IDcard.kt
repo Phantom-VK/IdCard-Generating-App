@@ -1,7 +1,5 @@
 package com.app.idCard.kotlin.fragments
 
-import android.os.Bundle
-import android.view.View
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
@@ -28,41 +26,26 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.platform.ComposeView
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
-import androidx.fragment.app.Fragment
-import com.app.idCard.R
-import com.app.idCard.ui.theme.IdCardAppTheme
-
-class IDCardFragment : Fragment(R.layout.fragment_id_card) {
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        view.findViewById<ComposeView>(R.id.idcard_compose_view).setContent {
-            IdCardAppTheme {
-                IDCard()
-            }
-        }
-    }
-}
 
 
 @Composable
 fun IDCard() {
 
-    var name by remember {
+    val name by remember {
         mutableStateOf("")
     }
-    var regNumber by remember {
+    val regNumber by remember {
         mutableStateOf("")
     }
-    var branch by remember {
+    val branch by remember {
         mutableStateOf("")
     }
-    var dob by remember {
+    val dob by remember {
         mutableStateOf("")
     }
-    var mobilenumber by remember {
+    val mobilenumber by remember {
         mutableStateOf("")
     }
     var pdfName by rememberSaveable {

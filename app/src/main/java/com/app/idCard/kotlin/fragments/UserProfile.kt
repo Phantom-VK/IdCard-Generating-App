@@ -1,7 +1,10 @@
 package com.app.idCard.kotlin.fragments
 
 import android.os.Bundle
+import android.view.LayoutInflater
+import android.view.TextureView
 import android.view.View
+import android.widget.TextView
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -67,7 +70,16 @@ class ProfileFragment :Fragment(R.layout.fragment_user_profile){
 fun UserProfile() {
     val appUtils = AppUtils()
     val context = LocalContext.current
-    val view = LocalView.current
+    val view = LayoutInflater.from(context).inflate(R.layout.fragment_id_card, null);
+
+    val tvstudentName = view.findViewById<TextView>(R.id.name)
+    val tvregNumbertext = view.findViewById<TextView>(R.id.reg_number)
+    val tvbranchText = view.findViewById<TextView>(R.id.branch)
+    val tvdobText = view.findViewById<TextView>(R.id.dob)
+    val tvmobileNumberText = view.findViewById<TextView>(R.id.mobilenumber)
+
+
+
 
 
     var name by remember {
@@ -190,6 +202,13 @@ fun UserProfile() {
         ) {
             Button(
                 onClick = {
+
+                    tvstudentName.text = "Nmae: $name"
+                    tvdobText.text = "DOB: $dob"
+                    tvbranchText.text = "Branch: $branch"
+                    tvregNumbertext.text = "Reg. no. $regNumber"
+                    tvmobileNumberText.text = "Mob.no.: $mobilenumber"
+
                     appUtils.convertComposableToPDF(context = context,
                         composeView = view,
                         pdfName = pdfName)
